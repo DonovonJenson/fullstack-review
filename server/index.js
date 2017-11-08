@@ -1,13 +1,18 @@
 const express = require('express');
 let app = express();
 let mongo = require('../database/index.js')
+let bodyParser = require('body-parser');
 
 app.use(express.static(__dirname + '/../client/dist'));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
 
 app.post('/repos', function (req, res) {
 	res.status(201);
-	res.end('noice');
-  // TODO - your code here!
+	getReposByUsername(req.body.term);
+	res.end(req.body.term)
   // This route should take the github username provided
   // and get the repo information from the github API, then
   // save the repo information in the database

@@ -15,15 +15,15 @@ class App extends React.Component {
 
   search (term) {
     console.log(`${term} was searched`);
+    //Send request to Server
     $.ajax({
       type: 'POST',
       url: "/repos",
-      data: term,
+      data: {term:term},
       success: (data) => {
-        console.log('did sumn')
+        console.log(data)
         }
       })
-    //Send request to Server
     //Set state to additional term
   }
 
