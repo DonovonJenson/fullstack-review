@@ -1,5 +1,6 @@
 const request = require('request');
-const config = require('../config.js');
+//const config = require('../config.js');
+
 
 let getReposByUsername = (term, callback) => {
   console.log('https://api.github.com/users/' + term+'/repos/')
@@ -12,7 +13,7 @@ let getReposByUsername = (term, callback) => {
     url: 'https://api.github.com/users/' + term + '/repos',
     headers: {
       'User-Agent': 'request',
-      'Authorization': `token ${config.TOKEN}`
+      'Authorization': `token ${config}`
     }
   };
   request(options, function (error, response, body) {
