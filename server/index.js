@@ -11,6 +11,12 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+let port = process.env.PORT || 1128;
+
+app.listen(port, function() {
+  console.log(`listening on port ${port}`);
+});
+
 app.post('/repos', function (req, res) {
 	res.status(201);
 	var repoNumber = 0
@@ -53,13 +59,9 @@ app.get("/favicon.ico", (req,res) =>{
 	res.status(200);
 	res.end('ok');
 })
-let port = process.env.PORT || 1128;
 
 app.get('/cool', function(request, response) {
   response.send(cool());
 });
 
-app.listen(port, function() {
-  console.log(`listening on port ${port}`);
-});
 
