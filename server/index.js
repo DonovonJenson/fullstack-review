@@ -53,7 +53,7 @@ app.get("/favicon.ico", (req,res) =>{
 	res.status(200);
 	res.end('ok');
 })
-let port = (process.env.PORT || 1128);
+let port = process.env.PORT || 1128;
 
 app.get('/cool', function(request, response) {
   response.send(cool());
