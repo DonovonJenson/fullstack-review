@@ -20,11 +20,14 @@ class App extends React.Component {
       type: 'POST',
       url: "/repos",
       data: {term:term},
-      success: (data) => {
-        console.log(data)
+      success: (repoNumber) => {
+        console.log(repoNumber)
         }
       })
     //Set state to additional term
+    var current = this.state.repos
+    current.push(term);
+    this.setState({repos: current})
   }
 
   render () {
