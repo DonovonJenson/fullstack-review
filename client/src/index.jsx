@@ -11,6 +11,8 @@ class App extends React.Component {
       repos: []
     }
 
+    this.get()
+
   }
 
   search (term) {
@@ -20,20 +22,41 @@ class App extends React.Component {
       type: 'POST',
       url: "/repos",
       data: {term:term},
-      success: (repoNumber) => {
-        console.log(repoNumber)
-        }
+      success: (repoList) => {
+        this.get()
+        // repoList = JSON.parse(repoList)
+        // var current = this.state.repos
+        // repoList.forEach((newRepo) => {
+        //     current.push(newRepo);
+         // })
+        // this.setState({repos: current})
+         },
       })
     //Set state to additional term
-    var current = this.state.repos
-    current.push(term);
-    this.setState({repos: current})
   }
+
+  get () {
+    $.ajax({
+      type: 'GET',
+      url: "/repos",
+      success: (repoList) =>{
+        this.setState({repos: []});
+        repoList = JSON.parse(repoList)
+        repoList.sort((a,b) => {
+          return (a.size - b.size)
+        })
+        console.log(repoList)
+        this.setState({repos: repoList})
+      }
+  })
+}
 
   render () {
     return (<div>
       <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
+      {this.state.repos.map((repo) =>{
+          return <RepoList repos={repo} key={repo.id}/>
+      })}
       <Search onSearch={this.search.bind(this)}/>
     </div>)
   }

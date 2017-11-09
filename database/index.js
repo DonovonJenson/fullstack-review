@@ -11,9 +11,10 @@ db.open('open', function() {
 
 let repoSchema = mongoose.Schema({
   id: { type: String, unique: true },	
-  url: String,
+  html_url: String,
   name : String,
-  user : String
+  userName : String,
+  size: Number
 
 });
 
@@ -21,8 +22,9 @@ let Repo = mongoose.model('Repo', repoSchema);
 
 //This adds a repo to mongo
 let save = (err, repoObject) => {
+	repoObject.url = repoObject.html_url;
+	repoObject.userName = repoObject.owner.login;
 	var newEntry = new Repo(repoObject)
-
 	newEntry.save(function (err, newEntry) {
   	if (err) return console.error(err);
 	});
@@ -35,6 +37,7 @@ let save = (err, repoObject) => {
 let topRepos = (callback) => {
 	Repo.find((err, repos) => {
   if (err) return console.error(err);
+  console.log(repos.length);
   callback(repos);
 })
 	//callback(Repo.find())
