@@ -63,8 +63,6 @@ app.get('/repos', function (req, res) {
 
 	res.end(JSON.stringify(repos))
 	});
-  // TODO - your code here!
-  // This route should send back the top 25 repos
 });
 
 app.get("/favicon.ico", (req,res) =>{

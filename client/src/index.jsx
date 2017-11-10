@@ -24,15 +24,8 @@ class App extends React.Component {
       data: {term:term},
       success: (repoList) => {
         this.get()
-        // repoList = JSON.parse(repoList)
-        // var current = this.state.repos
-        // repoList.forEach((newRepo) => {
-        //     current.push(newRepo);
-         // })
-        // this.setState({repos: current})
          },
       })
-    //Set state to additional term
   }
 
   get () {
